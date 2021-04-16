@@ -14,11 +14,11 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     @IBOutlet weak var currencyLabel: UILabel!
     @IBOutlet weak var bitcoinLabel: UILabel!
     
-    let coinManager = CoinManager()
+    var coinManager = CoinManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        currencyPicker.dataSource = self
+        //currencyPicker.dataSource = self
         currencyPicker.delegate = self
         // Do any additional setup after loading the view.
     }
