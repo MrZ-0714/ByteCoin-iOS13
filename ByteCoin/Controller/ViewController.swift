@@ -19,6 +19,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     override func viewDidLoad() {
         super.viewDidLoad()
         //currencyPicker.dataSource = self
+        coinManager.delegate = self
         currencyPicker.delegate = self
         // Do any additional setup after loading the view.
     }
@@ -40,6 +41,20 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         coinManager.getCoinPrice(for: selectedCurrency)
     }
     
-
 }
 
+//MARK: - CoinManagerDelegate
+
+extension ViewController: CoinManagerDelegate {
+    func didFailWithError(error: Error) {
+        print(error)
+    }
+    
+    func didGetPrice(price: String, currency: String) {
+        
+        DispatchQueue.main.async {
+            self.bitcoinLabel.text = price
+            self.currencyLabel.text = currency
+        }
+    }
+}
