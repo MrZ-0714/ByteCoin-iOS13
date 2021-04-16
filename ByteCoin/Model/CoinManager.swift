@@ -24,14 +24,17 @@ struct CoinManager {
                     print(error!)
                 }
                 
-                guard let data = data else { return }
+                guard let data = data else {
+                    print("data is not available")
+                    return
+                }
                 print(String(data: data, encoding: .utf8)!)
                 return
             }
             
             task.resume()
         }
-
+        
     }
     
 }
