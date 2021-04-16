@@ -17,15 +17,21 @@ struct CoinManager {
     
     func getCoinPrice(for selectedCurrency: String) {
         
-        let finalURL = URL(string: "\(baseURL)\(selectedCurrency)?apikey=\(apiKey)")
-        
-        let task = URLSession.shared.dataTask(with: finalURL!) { (data, response, error) in
-            guard let data = data else { return }
-            print(String(data: data, encoding: .utf8)!)
+        if let finalURL = URL(string: "\(baseURL)\(selectedCurrency)?apikey=\(apiKey)") {
+            
+            let task = URLSession.shared.dataTask(with: finalURL) { (data, response, error) in
+                if error != nil {
+                    print(error!)
+                }
+                
+                guard let data = data else { return }
+                print(String(data: data, encoding: .utf8)!)
+                return
+            }
+            
+            task.resume()
         }
-        
-        task.resume()
-        
+
     }
     
 }
